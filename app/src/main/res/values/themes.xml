@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 基础主题 - 管理面板等使用 -->
+    <style name="Theme.SchoolBrowser" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary_blue</item>
+        <item name="colorPrimaryDark">@color/primary_dark_blue</item>
+        <item name="colorAccent">@color/accent_blue</item>
+        <item name="android:statusBarColor">@color/primary_dark_blue</item>
+    </style>
+
+    <!-- 全屏主题 - 主浏览器使用 -->
+    <style name="Theme.SchoolBrowser.Fullscreen" parent="Theme.SchoolBrowser">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+</resources>

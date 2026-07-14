@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <!-- 进度条 -->
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:max="100"
+        android:progress="0"
+        android:progressDrawable="@drawable/progress_bar_drawable"
+        android:visibility="gone" />
+
+    <!-- 地址栏区域 -->
+    <LinearLayout
+        android:id="@+id/url_bar_container"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/url_bar_background"
+        android:elevation="2dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="4dp">
+
+        <!-- 锁图标 -->
+        <ImageView
+            android:id="@+id/iv_lock_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/ic_lock"
+            android:contentDescription="安全连接" />
+
+        <!-- URL 显示/输入区域 -->
+        <EditText
+            android:id="@+id/et_url"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:background="@drawable/url_bar_background"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:imeOptions="actionGo"
+            android:inputType="textUri"
+            android:maxLines="1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:singleLine="true"
+            android:textColor="@color/url_bar_text"
+            android:textSize="14sp"
+            android:hint="@string/url_bar_hint"
+            android:focusableInTouchMode="true" />
+
+        <!-- 快捷地址下拉按钮 -->
+        <ImageButton
+            android:id="@+id/btn_shortcuts_dropdown"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/btn_shortcuts"
+            android:src="@drawable/ic_star"
+            android:layout_marginStart="2dp" />
+
+        <!-- 刷新按钮 -->
+        <ImageButton
+            android:id="@+id/btn_refresh"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/btn_refresh"
+            android:src="@drawable/ic_refresh" />
+    </LinearLayout>
+
+    <!-- 快捷地址标签组（横向滚动） -->
+    <HorizontalScrollView
+        android:id="@+id/shortcuts_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:scrollbars="none"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/shortcuts_container"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp" />
+    </HorizontalScrollView>
+
+    <!-- 分隔线 -->
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider" />
+
+    <!-- 受控 WebView（全屏占据剩余空间） -->
+    <com.school.browser.webview.ControlledWebView
+        android:id="@+id/controlled_webview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+</LinearLayout>

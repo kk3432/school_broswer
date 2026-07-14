@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">学校浏览器</string>
+
+    <!-- 主界面 -->
+    <string name="url_bar_hint">输入网址…</string>
+    <string name="btn_refresh">刷新</string>
+    <string name="btn_shortcuts">快捷地址</string>
+    <string name="loading">加载中…</string>
+    <string name="page_blocked_title">访问被拦截</string>
+    <string name="page_blocked_message">根据当前策略，该网址不在允许访问范围内。</string>
+
+    <!-- 管理入口 -->
+    <string name="enter_password_title">请输入管理密码</string>
+    <string name="password_hint">管理密码</string>
+    <string name="btn_confirm">确认</string>
+    <string name="btn_cancel">取消</string>
+    <string name="btn_forgot_password">忘记密码？</string>
+    <string name="password_error">密码错误，请重试</string>
+    <string name="password_locked">已锁定，请稍后再试</string>
+    <string name="attempts_remaining">剩余尝试次数：%d</string>
+
+    <!-- 管理面板 -->
+    <string name="admin_panel_title">本地管理面板</string>
+    <string name="tab_policy">策略设置</string>
+    <string name="tab_shortcuts">快捷地址</string>
+    <string name="tab_remote">远程源</string>
+    <string name="tab_security">安全设置</string>
+    <string name="mode_whitelist">白名单模式</string>
+    <string name="mode_blacklist">黑名单模式</string>
+    <string name="whitelist_empty">白名单为空，所有网址将被拦截</string>
+    <string name="blacklist_empty">黑名单为空，所有网址均可访问</string>
+    <string name="add_url">添加网址</string>
+    <string name="url_hint">example.com</string>
+    <string name="homepage_label">首页地址</string>
+    <string name="homepage_hint">https://www.school.edu.cn</string>
+    <string name="save_policy">保存策略</string>
+    <string name="policy_saved">策略已保存</string>
+    <string name="delete">删除</string>
+    <string name="edit">编辑</string>
+
+    <!-- 快捷地址 -->
+    <string name="shortcut_name_hint">显示名称</string>
+    <string name="shortcut_url_hint">网址</string>
+    <string name="add_shortcut">添加快捷地址</string>
+    <string name="no_shortcuts">暂无快捷地址</string>
+    <string name="shortcut_delete_confirm">确认删除此快捷地址？</string>
+
+    <!-- 远程源 -->
+    <string name="remote_enabled">启用远程策略</string>
+    <string name="remote_protocol">协议类型</string>
+    <string name="remote_url">远程地址</string>
+    <string name="remote_url_hint">https://example.com/policy.json</string>
+    <string name="smb_host_hint">服务器地址</string>
+    <string name="smb_path_hint">共享路径</string>
+    <string name="smb_domain_hint">域</string>
+    <string name="smb_user_hint">用户名</string>
+    <string name="smb_password_hint">密码</string>
+    <string name="skip_ssl_verify">跳过 SSL 证书验证</string>
+    <string name="force_local_mode">强制本地模式</string>
+
+    <!-- 安全设置 -->
+    <string name="change_password">修改管理密码</string>
+    <string name="old_password_hint">当前密码</string>
+    <string name="new_password_hint">新密码</string>
+    <string name="confirm_password_hint">确认新密码</string>
+    <string name="password_changed">密码已修改</string>
+    <string name="passwords_not_match">两次输入的密码不一致</string>
+    <string name="reset_to_default">重置为默认策略</string>
+    <string name="reset_confirm">确认重置为默认策略？此操作不可撤销。</string>
+
+    <!-- 首次设置 -->
+    <string name="first_setup_title">首次设置</string>
+    <string name="setup_password_label">设置管理密码</string>
+    <string name="setup_seed_label">恢复种子（请务必保存）</string>
+    <string name="setup_seed_hint">请截图或记录以下种子码，用于忘记密码时恢复</string>
+    <string name="setup_complete">设置完成</string>
+
+    <!-- 密码恢复 -->
+    <string name="recovery_title">密码恢复</string>
+    <string name="recovery_code_hint">输入6位验证码</string>
+    <string name="recovery_code_invalid">验证码无效，请重试</string>
+    <string name="recovery_locked">尝试次数过多，已锁定30分钟</string>
+    <string name="set_new_password">设置新密码</string>
+
+    <!-- 通用 -->
+    <string name="ok">确定</string>
+    <string name="error_occurred">发生错误</string>
+    <string name="network_unavailable">网络不可用</string>
+    <string name="sync_failed">策略同步失败</string>
+</resources>

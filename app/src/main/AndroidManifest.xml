@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- 网络权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <!-- SMB 可能需要的外部存储权限（按需请求） -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="29" />
+
+    <!-- 保持屏幕常亮（可选，适合学校场景） -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:name=".App"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.SchoolBrowser"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="34">
+
+        <!-- 主浏览器 Activity（全屏 WebView） -->
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/Theme.SchoolBrowser.Fullscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 本地管理面板 -->
+        <activity
+            android:name=".ui.admin.LocalManagementActivity"
+            android:exported="false"
+            android:label="@string/admin_panel_title"
+            android:theme="@style/Theme.SchoolBrowser" />
+
+        <!-- 首次设置引导 -->
+        <activity
+            android:name=".ui.FirstSetupActivity"
+            android:exported="false"
+            android:label="@string/first_setup_title"
+            android:theme="@style/Theme.SchoolBrowser" />
+
+    </application>
+</manifest>

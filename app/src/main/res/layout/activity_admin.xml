@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- ========== 首页设置 ========== -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/homepage_label"
+            android:textSize="16sp"
+            android:textColor="@color/primary_blue"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/et_homepage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/homepage_hint"
+            android:inputType="textUri"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:layout_marginBottom="16dp" />
+
+        <!-- ========== 快捷地址管理 ========== -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_shortcuts"
+            android:textSize="16sp"
+            android:textColor="@color/primary_blue"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <EditText
+                android:id="@+id/et_shortcut_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/shortcut_name_hint"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/et_shortcut_url"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:hint="@string/shortcut_url_hint"
+                android:inputType="textUri"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:layout_marginStart="8dp" />
+
+            <Button
+                android:id="@+id/btn_add_shortcut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_shortcut"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_shortcuts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/tv_no_shortcuts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/no_shortcuts"
+            android:textColor="@color/blocked_page_text"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_marginBottom="16dp" />
+
+        <!-- ========== 远程源配置 ========== -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_remote"
+            android:textSize="16sp"
+            android:textColor="@color/primary_blue"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/sw_remote_enabled"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/remote_enabled"
+            android:layout_marginBottom="8dp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/sw_force_local"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/force_local_mode"
+            android:layout_marginBottom="12dp" />
+
+        <RadioGroup
+            android:id="@+id/rg_remote_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <RadioButton
+                android:id="@+id/rb_http"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="HTTP/HTTPS"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/rb_smb"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="SMB" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/et_remote_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/remote_url_hint"
+            android:inputType="textUri"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:layout_marginBottom="12dp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/sw_skip_ssl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/skip_ssl_verify"
+            android:layout_marginBottom="12dp" />
+
+        <EditText
+            android:id="@+id/et_smb_host"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/smb_host_hint"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:visibility="gone"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/et_smb_path"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/smb_path_hint"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:visibility="gone"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/et_smb_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/smb_user_hint"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:visibility="gone"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/et_smb_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/smb_password_hint"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:visibility="gone"
+            android:layout_marginBottom="16dp" />
+
+        <!-- ========== 安全设置 ========== -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_security"
+            android:textSize="16sp"
+            android:textColor="@color/primary_blue"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_change_password"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/change_password"
+            android:textColor="@color/primary_blue"
+            android:gravity="start" />
+
+        <!-- ========== 保存按钮 ========== -->
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@string/save_policy"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+</ScrollView>
