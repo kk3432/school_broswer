@@ -128,7 +128,7 @@ school_broswer/
 ### 编译步骤
 1. 克隆仓库
    ```bash
-   [git clone <repo-url>](https://github.com/kk3432/school_broswer.git)
+   git clone https://github.com/kk3432/school_broswer.git
    cd school_broswer
    ```
 2. 用 Android Studio 打开项目根目录
