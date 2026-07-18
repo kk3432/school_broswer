@@ -69,7 +69,6 @@ class ControlledWebView @JvmOverloads constructor(
 
             // 缓存策略
             cacheMode = WebSettings.LOAD_DEFAULT
-            setAppCacheEnabled(false)
 
             // 安全增强
             mixedContentMode = WebSettings.MIXED_CONTENT_NEVER_ALLOW
@@ -157,11 +156,6 @@ class ControlledWebView @JvmOverloads constructor(
         isHorizontalScrollBarEnabled = false
         overScrollMode = OVER_SCROLL_NEVER
 
-        // ========== 布局参数 ==========
-        layoutParams = ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT
-        )
     }
 
     /**

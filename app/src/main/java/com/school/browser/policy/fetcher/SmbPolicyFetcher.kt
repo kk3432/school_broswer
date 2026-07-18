@@ -26,8 +26,9 @@ class SmbPolicyFetcher : PolicyFetcher {
             decryptPassword(config.encryptedSmbPassword)
         )
 
-        val smbFile = SmbFile(smbUrl, auth)
-        smbFile.inputStream.use { inputStream ->
+        val cifsContext = SingletonContext.getInstance().withCredentials(auth)
+        val smbFile = SmbFile(smbUrl, cifsContext)
+        smbFile.openInputStream().use { inputStream ->
             val json = inputStream.bufferedReader().readText()
             Policy.fromJson(json)
         }

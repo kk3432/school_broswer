@@ -1,0 +1,167 @@
+============================================================
+  学校受控浏览器 (School Browser) — 任务与问题清单
+============================================================
+
+最近更新: 2026-07-18
+
+============================================================
+一、已完成功能 ✅
+============================================================
+
+[核心拦截]
+  ✅ 系统 WebView 强制使用，不内嵌第三方内核
+  ✅ 黑白名单双模式：白名单模式仅允许列表内网址，
+     黑名单模式禁止列表内网址
+  ✅ 通配符域名匹配：支持 *.school.edu.cn 格式
+  ✅ 所有请求拦截：shouldOverrideUrlLoading + shouldInterceptRequest
+  ✅ 拦截页面显示中文提示
+
+[UI 功能]
+  ✅ 顶部线性进度条，页面加载时显示
+  ✅ 地址栏：显示当前 URL + 支持输入导航 + 策略校验
+  ✅ 快捷地址：横向滚动标签组 + 下拉弹窗列表
+  ✅ 锁图标：HTTPS 时显示绿色锁
+
+[远程策略拉取]
+  ✅ HTTP/HTTPS 拉取（OkHttp 4.12）
+  ✅ 可选跳过 SSL 证书验证（内网自签证书场景）
+  ✅ SMB 协议拉取（jcifs-ng 2.1.10）
+  ✅ SMB 密码 AES-256-GCM 加密存储
+  ✅ 远程策略 JSON 缓存到本地
+
+[策略优先级]
+  ✅ 远程策略 > 缓存远程策略 > 本地 .txt 文件 > 本地加密策略
+  ✅ 白名单模式下 whitelist 为空 → 策略无效 → 显示"等待配置"
+  ✅ 黑名单模式下 blacklist 为空 → 不拦截任何网址（有效）
+  ✅ 本地 .txt 文件自动读取：
+     - 白名单：policy_data/true_website.txt
+     - 黑名单：policy_data/notrue_website.txt
+     - 格式：每行一个域名，# 注释行，支持通配符
+  ✅ 强制本地模式开关
+
+[安全设计]
+  ✅ 管理密码 BCrypt 哈希 (cost=12)
+  ✅ EncryptedSharedPreferences 存储敏感数据
+  ✅ AES-256-GCM 加密本地策略（Android Keystore 硬件保护）
+  ✅ 密码错误 3 次锁定 30 分钟
+  ✅ 恢复码错误 5 次锁定
+  ✅ ProGuard 代码混淆
+  ✅ 禁止文件访问 / 多窗口 / 下载
+  ✅ debuggable = false
+
+[管理面板]
+  ✅ 长按 3 秒 → 密码验证 → 管理面板
+  ✅ 首页地址设置
+  ✅ 快捷地址增删
+  ✅ 远程源配置（HTTP/HTTPS / SMB、跳过 SSL、强制本地）
+  ✅ 修改管理密码
+  ✅ 首次设置向导：设置密码 + 生成恢复种子
+
+[文档]
+  ✅ README.md（功能特性、技术栈、编译指南、JSON 格式、安全设计）
+
+============================================================
+二、当前待解决 🔧
+============================================================
+
+[资源问题]
+  🔧 @mipmap/ic_launcher 启动图标缺失
+     → 已创建 mipmap-anydpi-v26/ic_launcher.xml (锁图标 + 蓝底)
+     → 已创建 mipmap-anydpi-v26/ic_launcher_round.xml
+     → 已创建 values/ic_launcher_background.xml (背景色)
+
+============================================================
+三、未完成功能 ⚠️
+============================================================
+
+[TOTP 动态密码恢复 — 高优先级]
+  ⚠️ RecoveryHandler.generateSeed()
+     - 当前：占位随机字符串
+     - 待做：生成标准 Base32 TOTP 种子
+     - 推荐库：Apache Commons Codec / kotlin-totp
+  ⚠️ RecoveryHandler.validate(userCode)
+     - 当前：固定返回 false
+     - 待做：HMAC-SHA1 计算 TOTP，时间窗口容错验证
+  ⚠️ 首次设置时生成 TOTP 二维码
+     - 库：ZXing 已引入依赖
+     - 待做：otpauth://totp/... URI → 二维码图片显示
+     - Google Authenticator / Microsoft Authenticator 扫码即可
+
+[策略安全 — 中优先级]
+  ⚠️ 远程策略 HMAC 签名校验
+     - 防止中间人篡改策略 JSON
+     - 需在 HttpPolicyFetcher/SmbPolicyFetcher 中增加验签逻辑
+     - 密钥管理方案待定
+
+[MDM 集成 — 中优先级]
+  ⚠️ 单一应用模式 (Kiosk Mode)
+     - 配合 MDM（如 ManageEngine / Intune）锁定设备
+     - 需设备管理员权限
+     - DevicePolicyManager.setLockTaskPackages()
+
+[测试 — 中优先级]
+  ⚠️ 单元测试
+     - DomainMatcher 通配符匹配测试
+     - Policy.fromJson/toJson 序列化测试
+     - CryptoUtil 加解密往返测试
+  ⚠️ UI 测试
+     - 密码输入流程
+     - 策略刷新回退逻辑
+     - 首次设置引导流程
+  ⚠️ 集成测试
+     - HTTP 远程拉取（mock 服务器）
+     - SMB 远程拉取（测试共享文件夹）
+
+[后台管理系统 — 低优先级]
+  ⚠️ 策略下发 Web 管理端（独立项目）
+     - 接口：GET /api/policy/latest
+     - 后台编辑白名单/黑名单/快捷地址
+     - 多学校/多设备管理
+     - 策略变更历史记录
+
+[CI/CD — 低优先级]
+  ⚠️ GitHub Actions 自动构建 APK
+     - 自动签名 Release APK
+     - 上传到 GitHub Releases
+
+============================================================
+四、已知限制 & 注意事项 ⚡
+============================================================
+
+  ⚡ minSdk = 26 (Android 8.0)，不支持更低版本
+  ⚡ 自适应图标 API 26+，低版本设备需额外 png 图标
+     （当前未提供 png 回退，低版本使用默认 Android 图标）
+  ⚡ SMB 依赖 jcifs-ng，需 SMB v2/v3 服务器
+  ⚡ 策略 JSON 未签名，存在中间人篡改风险
+  ⚡ 管理面板未做 Session 超时，打开后一直有效直到返回
+  ⚡ WebView 无法拦截 WebSocket 连接
+  ⚡ 地址栏在无策略时可输入任意 URL → 但实际加载会被拦截
+
+============================================================
+五、文件缺漏检查 📁
+============================================================
+
+  ✅ build.gradle.kts (Project + App)
+  ✅ settings.gradle.kts
+  ✅ gradle.properties
+  ✅ gradle/wrapper/gradle-wrapper.properties
+  ✅ app/proguard-rules.pro
+  ✅ AndroidManifest.xml
+  ✅ App.kt
+  ✅ Policy.kt / RemoteSourceConfig.kt
+  ✅ PolicyManager.kt
+  ✅ PolicyFetcher.kt / HttpPolicyFetcher.kt / SmbPolicyFetcher.kt
+  ✅ LocalPolicyEditor.kt
+  ✅ SyncScheduler.kt
+  ✅ ControlledWebView.kt / InterceptingClient.kt / BlockedPageHelper.kt
+  ✅ MainActivity.kt / FirstSetupActivity.kt
+  ✅ PasswordDialog.kt / RecoveryDialog.kt
+  ✅ LocalManagementActivity.kt
+  ✅ CryptoUtil.kt / PasswordManager.kt / RecoveryHandler.kt
+  ✅ Constants.kt / DomainMatcher.kt / NetworkUtil.kt
+  ✅ 所有 layout / drawable / values 资源文件
+  ✅ mipmap-anydpi-v26/ic_launcher.xml / ic_launcher_round.xml
+  ✅ values/ic_launcher_background.xml
+  ✅ plan.txt
+
+============================================================

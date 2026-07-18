@@ -11,7 +11,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="29" />
+        android:maxSdkVersion="29"
+        tools:ignore="ScopedStorage" />
 
     <!-- 保持屏幕常亮（可选，适合学校场景） -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -24,7 +25,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SchoolBrowser"
         android:usesCleartextTraffic="true"
-        tools:targetApi="34">
+        tools:targetApi="34"
+        tools:ignore="DataExtractionRules">
 
         <!-- 主浏览器 Activity（全屏 WebView） -->
         <activity

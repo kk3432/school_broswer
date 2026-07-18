@@ -40,7 +40,7 @@ data class Policy(
 
         /** 将 Policy 对象序列化为 JSON 字符串 */
         fun toJson(policy: Policy): String =
-            json.encodeToString(policy)
+            json.encodeToString(serializer(), policy)
 
         /** 创建默认策略（空策略，强制要求远程配置或本地文件策略） */
         fun defaultPolicy(): Policy = Policy(
