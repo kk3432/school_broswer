@@ -70,7 +70,7 @@ dependencies {
     implementation("eu.agno3.jcifs:jcifs-ng:2.1.10")
 
     // AndroidX Security (EncryptedSharedPreferences)
-    implementation("androidx.security:security-crypto:1.1.0-alpha06")
+    implementation("androidx.security:security-crypto:1.0.0")
 
     // BCrypt 密码哈希
     implementation("at.favre.lib:bcrypt:0.10.2")

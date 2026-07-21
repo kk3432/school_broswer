@@ -80,9 +80,6 @@ class ControlledWebView @JvmOverloads constructor(
             displayZoomControls = false
         }
 
-        // ========== WebViewClient（请求拦截） ==========
-        webViewClient = interceptingClient
-
         // ========== WebChromeClient（进度回调） ==========
         webChromeClient = object : WebChromeClient() {
             override fun onProgressChanged(view: WebView?, newProgress: Int) {

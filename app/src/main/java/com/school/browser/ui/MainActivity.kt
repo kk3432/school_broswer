@@ -300,7 +300,7 @@ class MainActivity : AppCompatActivity() {
      */
     private fun onLongPressDetected() {
         // 检查是否已完成首次设置
-        if (!PasswordManager.isSetupCompleted()) {
+        if (!PasswordManager.isSetupCompleted(this)) {
             // 首次启动，跳转设置
             startActivity(android.content.Intent(this, FirstSetupActivity::class.java))
             return

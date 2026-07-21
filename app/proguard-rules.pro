@@ -1,21 +1,47 @@
 # 学校受控浏览器 ProGuard 规则
 
-# 保留 Kotlin 序列化
+# ==================== Kotlin 序列化 (完整保留) ====================
 -keepattributes *Annotation*, InnerClasses
 -dontnote kotlinx.serialization.AnnotationsKt
--keepclassmembers class kotlinx.serialization.json.** {
+
+# kotlinx.serialization 核心框架
+-keep,includedescriptorclasses class kotlinx.serialization.**$$serializer { *; }
+-keepclassmembers class kotlinx.serialization.** {
     *** Companion;
 }
--keepclasseswithmembers class kotlinx.serialization.json.** {
+-keepclasseswithmembers class kotlinx.serialization.** {
     kotlinx.serialization.KSerializer serializer(...);
 }
--keep,includedescriptorclasses class com.school.browser.policy.model.**$$serializer { *; }
--keepclassmembers class com.school.browser.policy.model.** {
+
+# 保留所有 @Serializable 注解的类及其伴生对象
+-keep @kotlinx.serialization.Serializable class * {
+    <init>(...);
+}
+-keepclassmembers @kotlinx.serialization.Serializable class * {
     *** Companion;
-}
--keepclasseswithmembers class com.school.browser.policy.model.** {
     kotlinx.serialization.KSerializer serializer(...);
 }
+
+# 保留生成的 $serializer 内部类
+-keep,includedescriptorclasses class **$$serializer { *; }
+-keepclassmembers class ** {
+    *** Companion;
+    kotlinx.serialization.KSerializer serializer(...);
+}
+
+# 序列化枚举
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+    <fields>;
+}
+
+# 保留 RemoteType 枚举
+-keep enum com.school.browser.policy.model.RemoteType { *; }
+
+# 保留所有数据模型类
+-keep class com.school.browser.policy.model.** { *; }
+-keep class com.school.browser.App { *; }
 
 # OkHttp
 -dontwarn okhttp3.**

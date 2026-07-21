@@ -36,10 +36,8 @@ object PasswordManager {
     /**
      * 检查是否已完成首次设置（已存储密码哈希）。
      */
-    fun isSetupCompleted(context: Context? = null): Boolean {
-        // 使用 App 的静态 context
-        val ctx = context ?: com.school.browser.App.instance
-        val prefs = getPrefs(ctx)
+    fun isSetupCompleted(context: Context): Boolean {
+        val prefs = getPrefs(context)
         return prefs.getString(Constants.KEY_PASSWORD_HASH, null) != null
     }
 
