@@ -2,7 +2,7 @@
   学校受控浏览器 (School Browser) — 任务与问题清单
 ============================================================
 
-最近更新: 2026-07-18
+最近更新: 2026-07-21
 
 ============================================================
 一、已完成功能 ✅
@@ -45,9 +45,10 @@
   ✅ AES-256-GCM 加密本地策略（Android Keystore 硬件保护）
   ✅ 密码错误 3 次锁定 30 分钟
   ✅ 恢复码错误 5 次锁定
-  ✅ ProGuard 代码混淆
+  ✅ ProGuard 代码混淆 + 完整序列化保留规则
   ✅ 禁止文件访问 / 多窗口 / 下载
   ✅ debuggable = false
+  ✅ 网络安全配置（network_security_config.xml）
 
 [管理面板]
   ✅ 长按 3 秒 → 密码验证 → 管理面板
@@ -57,6 +58,15 @@
   ✅ 修改管理密码
   ✅ 首次设置向导：设置密码 + 生成恢复种子
 
+[稳定性修复 — 2026-07-21]
+  ✅ 启动图标改用 @drawable/ic_lock，移除 mipmap PNG 依赖
+  ✅ 删除 WebViewClient 重复覆盖（ControlledWebView.kt）
+  ✅ security-crypto 降级到稳定版 1.0.0
+  ✅ PasswordManager.isSetupCompleted() 必传 context，避免时序崩溃
+  ✅ 新增 res/xml/network_security_config.xml 网络安全配置
+  ✅ ProGuard 补充 @Serializable + $serializer + 枚举完整保留规则
+  ✅ 构建缓存清理
+
 [文档]
   ✅ README.md（功能特性、技术栈、编译指南、JSON 格式、安全设计）
 
@@ -64,11 +74,7 @@
 二、当前待解决 🔧
 ============================================================
 
-[资源问题]
-  🔧 @mipmap/ic_launcher 启动图标缺失
-     → 已创建 mipmap-anydpi-v26/ic_launcher.xml (锁图标 + 蓝底)
-     → 已创建 mipmap-anydpi-v26/ic_launcher_round.xml
-     → 已创建 values/ic_launcher_background.xml (背景色)
+（无 — 所有已知编译/运行时问题已修复）
 
 ============================================================
 三、未完成功能 ⚠️
@@ -129,16 +135,16 @@
 ============================================================
 
   ⚡ minSdk = 26 (Android 8.0)，不支持更低版本
-  ⚡ 自适应图标 API 26+，低版本设备需额外 png 图标
-     （当前未提供 png 回退，低版本使用默认 Android 图标）
+  ⚡ 启动图标使用 @drawable/ic_lock 矢量图，向下兼容
   ⚡ SMB 依赖 jcifs-ng，需 SMB v2/v3 服务器
   ⚡ 策略 JSON 未签名，存在中间人篡改风险
   ⚡ 管理面板未做 Session 超时，打开后一直有效直到返回
   ⚡ WebView 无法拦截 WebSocket 连接
   ⚡ 地址栏在无策略时可输入任意 URL → 但实际加载会被拦截
+  ⚡ Lint 任务已全局禁用（lintVitalAnalyzeDebug 内部崩溃）
 
 ============================================================
-五、文件缺漏检查 📁
+五、文件清单 📁
 ============================================================
 
   ✅ build.gradle.kts (Project + App)
@@ -146,7 +152,9 @@
   ✅ gradle.properties
   ✅ gradle/wrapper/gradle-wrapper.properties
   ✅ app/proguard-rules.pro
+  ✅ app/lint.xml
   ✅ AndroidManifest.xml
+  ✅ res/xml/network_security_config.xml
   ✅ App.kt
   ✅ Policy.kt / RemoteSourceConfig.kt
   ✅ PolicyManager.kt
@@ -161,7 +169,8 @@
   ✅ Constants.kt / DomainMatcher.kt / NetworkUtil.kt
   ✅ 所有 layout / drawable / values 资源文件
   ✅ mipmap-anydpi-v26/ic_launcher.xml / ic_launcher_round.xml
-  ✅ values/ic_launcher_background.xml
+  ✅ values/colors.xml (含 ic_launcher_background)
   ✅ plan.txt
+  ✅ README.md
 
 ============================================================

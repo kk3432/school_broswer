@@ -49,14 +49,15 @@
 |------|------|
 | 语言 | Kotlin 100% |
 | UI | XML Layout + Material Components |
-| 序列化 | kotlinx-serialization |
-| HTTP | OkHttp 4.12 |
+| 序列化 | kotlinx-serialization 1.6.2 |
+| HTTP | OkHttp 4.12.0 |
 | SMB | jcifs-ng 2.1.10 |
-| 密码哈希 | BCrypt (at.favre.lib) |
-| 加密存储 | Android Keystore + EncryptedSharedPreferences |
+| 密码哈希 | BCrypt 0.10.2 (at.favre.lib) |
+| 加密存储 | Android Keystore + EncryptedSharedPreferences 1.0.0 |
 | 加密算法 | AES-256-GCM (AEAD) |
-| 协程 | Kotlin Coroutines |
-| 混淆 | ProGuard |
+| 网络安全 | network_security_config.xml |
+| 协程 | Kotlin Coroutines 1.7.3 |
+| 混淆 | ProGuard + 完整序列化保留规则 |
 
 ---
 
